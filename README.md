@@ -43,7 +43,7 @@ npm run preview
 
 ## 📁 Project Structure
 
-```
+```bash
 Frontend/
 ├── index.html          # Entry HTML file
 ├── main.js            # Main JavaScript application
@@ -55,6 +55,7 @@ Frontend/
 ## 🎨 Design System
 
 The project uses a comprehensive design system with:
+
 - Custom CSS variables for colors, spacing, and typography
 - Smooth animations and transitions
 - Glassmorphism effects
@@ -64,6 +65,7 @@ The project uses a comprehensive design system with:
 ## 🧩 JavaScript Architecture
 
 The application uses a class-based architecture:
+
 - **App Class**: Main application controller
 - **Dynamic Rendering**: Features are rendered programmatically
 - **Event Handling**: Clean event listener management
