@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { AuthInput } from './components/AuthInput';
 import { AuthButton } from './components/AuthButton';
@@ -29,7 +29,7 @@ const AdminLogin = () => {
                         <input type="checkbox" className="form-checkbox h-4 w-4 text-gray-900 border-gray-300 rounded" />
                         <span className="ml-2 text-sm font-bold text-gray-700">Remember me</span>
                     </label>
-                    <Link to="/admin/forgot-password" classNam="text-sm font-bold text-blue-900 hover:text-blue-700">
+                    <Link to="/admin/forgot-password" className="text-sm font-bold text-blue-900 hover:text-blue-700">
                         Recover password
                     </Link>
                 </div>

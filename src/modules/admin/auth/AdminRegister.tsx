@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { AuthInput } from './components/AuthInput';
 import { AuthButton } from './components/AuthButton';

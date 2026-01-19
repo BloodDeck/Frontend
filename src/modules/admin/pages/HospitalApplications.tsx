@@ -2,7 +2,7 @@
 import StatCard from '../components/StatCard';
 import StatusChip from '../components/StatusChip';
 import DataTable from '../components/DataTable';
-import { Search, Filter, AlertCircle, CheckCircle, FileText, XCircle, Eye, Check, X } from 'lucide-react';
+import { Search, AlertCircle, CheckCircle, FileText, XCircle, Eye, Check, X } from 'lucide-react';
 
 const mockHospitals = [
     {
@@ -53,10 +53,10 @@ const HospitalApplications = () => {
             {/* Header */}
             <div className="flex justify-between items-end">
                 <div>
-                     <p className="text-gray-400 text-sm mb-1">Manage and review incoming hospital verification requests.</p>
+                    <p className="text-gray-400 text-sm mb-1">Manage and review incoming hospital verification requests.</p>
                 </div>
                 <div className="flex gap-3">
-                     <button className="bg-[#2D2D2D] hover:bg-[#3D3D3D] text-white px-4 py-2 rounded-lg text-sm font-medium border border-[#3D3D3D] flex items-center gap-2">
+                    <button className="bg-[#2D2D2D] hover:bg-[#3D3D3D] text-white px-4 py-2 rounded-lg text-sm font-medium border border-[#3D3D3D] flex items-center gap-2">
                         Export Report
                     </button>
                     <button className="bg-[#2D2D2D] hover:bg-[#3D3D3D] text-white px-4 py-2 rounded-lg text-sm font-medium border border-[#3D3D3D] flex items-center gap-2">
@@ -91,7 +91,7 @@ const HospitalApplications = () => {
                     icon={<CheckCircle size={20} />}
                     iconColor="text-green-500"
                 />
-                 <StatCard
+                <StatCard
                     label="Rejected"
                     value="24"
                     trend="0%"
@@ -103,7 +103,7 @@ const HospitalApplications = () => {
 
             {/* Filter Bar */}
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center bg-white/5 backdrop-blur-md p-2 rounded-xl border border-white/10">
-                 <div className="relative w-full md:w-96">
+                <div className="relative w-full md:w-96">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                     <input
                         type="text"
@@ -115,7 +115,7 @@ const HospitalApplications = () => {
                     <select className="bg-black/20 text-gray-300 text-sm border border-white/5 rounded-lg px-4 py-2 focus:outline-none h-10">
                         <option>All Status</option>
                     </select>
-                     <select className="bg-black/20 text-gray-300 text-sm border border-white/5 rounded-lg px-4 py-2 focus:outline-none h-10">
+                    <select className="bg-black/20 text-gray-300 text-sm border border-white/5 rounded-lg px-4 py-2 focus:outline-none h-10">
                         <option>All Location</option>
                     </select>
                 </div>
@@ -127,9 +127,9 @@ const HospitalApplications = () => {
                     {
                         header: 'HOSPITAL',
                         accessor: (row: any) => (
-                             <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-400">
-                                   {row.name.charAt(0)}
+                                    {row.name.charAt(0)}
                                 </div>
                                 <div>
                                     <p className="font-medium text-white text-sm">{row.name}</p>
@@ -147,14 +147,14 @@ const HospitalApplications = () => {
                         accessor: (row: any) => <StatusChip status={row.status} />
                     },
                     {
-                         header: 'ACTIONS',
-                         accessor: (_) => (
-                             <div className="flex gap-3 text-gray-400">
-                                 <button className="hover:text-blue-400"><Eye size={16} /></button>
-                                 <button className="hover:text-green-400"><Check size={16} /></button>
-                                 <button className="hover:text-red-400"><X size={16} /></button>
-                             </div>
-                         )
+                        header: 'ACTIONS',
+                        accessor: (_) => (
+                            <div className="flex gap-3 text-gray-400">
+                                <button className="hover:text-blue-400"><Eye size={16} /></button>
+                                <button className="hover:text-green-400"><Check size={16} /></button>
+                                <button className="hover:text-red-400"><X size={16} /></button>
+                            </div>
+                        )
                     }
                 ]}
                 data={mockHospitals}

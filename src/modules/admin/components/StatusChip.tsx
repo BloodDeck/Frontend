@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const StatusChip = ({ status }: { status: 'Pending' | 'In Review' | 'Approved' | 'Rejected' | 'Critical' | 'Completed' }) => {
     const getStatusStyles = (status: string) => {

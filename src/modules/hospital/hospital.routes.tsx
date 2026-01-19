@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { RouteObject } from 'react-router-dom';
 import HospitalLayout from './layout/HospitalLayout';
 import HospitalLogin from './auth/HospitalLogin';
