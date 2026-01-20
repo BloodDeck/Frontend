@@ -6,9 +6,9 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 const navLinks = [
     {href: "/donor", label: "Home"},
     {href: "/donor/locate-and-book", label: "Find a Center"},
-    {href: "", label: "My Appointment"},
-    {href: "", label: "My Rewards"},
-    {href: "", label: "My Impact"}
+    {href: "/donor/my-appointment", label: "My Appointment"},
+    {href: "/donor/my-rewards", label: "My Rewards"},
+    {href: "/donor/my-impact", label: "My Impact"}
 ]
 
 const Navbar = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
                 </NavLink>
                 <div className="flex items-center gap-10">
                     {navLinks.map((link, index) => (
-                        <NavLink key={index} to={link.href} style={navLinkStyles}>
+                        <NavLink key={index} to={link.href} style={navLinkStyles} end={link.href === "/donor"} className="text-donor-text-primary" >
                             {link.label}
                         </NavLink>
                     ))}
