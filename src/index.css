@@ -6,8 +6,33 @@
   font-weight: 400;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+@theme {
+  /* ===== Core Backgrounds for Donor Workflow ===== */
+  --color-donor-bg: #E5E7EB;           /* Main app background */
+  --color-donor-card: #FFFFFF;        /* Cards and panels */
+  --color-donor-border: #E6EAEA;      /* Card borders */
+
+  /* ===== Primary Brand ===== */
+  --color-donor-primary: #444444;     /* Main CTA buttons */
+  --color-donor-dark: #1F2422;        /* Hero sections */
+
+  /* ===== Text Colors ===== */
+  --color-donor-text-primary: #1F2937;    /* Main text */
+  --color-donor-text-secondary: #6B726F;  /* Descriptions */
+  --color-donor-text-muted: #9DA5A1;      /* Small hints */
+
+  /* ===== Accents ===== */
+  --color-donor-accent-red: #C6362F;      /* Blood / alerts */
+  --color-donor-accent-green: #3FA97A;    /* Success / health */
 }
