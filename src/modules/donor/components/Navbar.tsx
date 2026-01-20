@@ -4,7 +4,7 @@ import user_icon from "../../../assets/images/user.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 const navLinks = [
-    {href: "/donor", label: "Home"},
+    {href: "/donor/homescreen", label: "Home"},
     {href: "/donor/locate-and-book", label: "Find a Center"},
     {href: "/donor/my-appointment", label: "My Appointment"},
     {href: "/donor/my-rewards", label: "My Rewards"},
@@ -24,7 +24,7 @@ const Navbar = () => {
                 </NavLink>
                 <div className="flex items-center gap-10">
                     {navLinks.map((link, index) => (
-                        <NavLink key={index} to={link.href} style={navLinkStyles} end={link.href === "/donor"} className="text-donor-text-primary" >
+                        <NavLink key={index} to={link.href} style={navLinkStyles} end={link.href === "/donor/homescreen"} className="text-donor-text-primary" >
                             {link.label}
                         </NavLink>
                     ))}
