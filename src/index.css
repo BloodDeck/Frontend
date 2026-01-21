@@ -11,3 +11,21 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+/* ===== Core Backgrounds for Donor Workflow ===== */
+/* #E5E7EB;           Main app background */
+/* #FFFFFF;         Cards and panels */
+/* #E6EAEA;       Card borders */
+
+/* ===== Primary Brand ===== */
+/* #444444;      Main CTA buttons */
+/* #1F2422;         Hero sections */
+
+/* ===== Text Colors ===== */
+/* #1F2937;    Main text */
+/* #6B726F;  Descriptions */
+/* #9DA5A1;      Small hints */
+
+/* ===== Accents ===== */
+/* #C6362F;      Blood / alerts */
+/* #3FA97A;    Success / health */
