@@ -17,7 +17,7 @@ const Navbar = () => {
         });
 
         return (
-            <header className="fixed top-0 w-full bg-[#FFFFFF] border-[#E6EAEA] shadow-md">
+            <header className="fixed z-50 top-0 w-full bg-[#FFFFFF] border-[#E6EAEA] shadow-md">
                 <nav className="container mx-auto flex justify-between items-center py-2 px-0 backdrop-blur-md border-b border-[#E6EAEA]">
                 <NavLink to="/donor">
                     <img src={logo} alt="Logo" className="w-16" />
