@@ -19,7 +19,7 @@ const DispatchTracking = () => {
     };
 
     return (
-        <div className="flex h-[calc(100vh-6rem)] -m-8 relative overflow-hidden bg-gray-100">
+        <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-6rem)] -m-4 md:-m-8 bg-gray-100 overflow-hidden">
             {/* Map Area */}
             <div className="absolute inset-0 z-0">
                 {/* Mock Map Background */}
@@ -48,7 +48,7 @@ const DispatchTracking = () => {
                     </div>
                 </div>
 
-                <div className="absolute top-6 left-6 z-10 w-96">
+                <div className="absolute top-4 left-4 right-4 md:left-6 md:w-96 z-10">
                     <div className="bg-[#2D2D2D] rounded-lg p-2 flex items-center gap-3 shadow-lg">
                         <Search className="text-gray-400 ml-2" size={18} />
                         <input
@@ -61,7 +61,9 @@ const DispatchTracking = () => {
             </div>
 
             {/* Right Tracking Panel */}
-            <div className={`absolute right-0 top-0 h-full w-96 bg-[#262626] text-white z-20 shadow-2xl p-6 flex flex-col transition-transform duration-300 transform translate-x-0`}>
+            <div className={`absolute bottom-0 md:top-0 md:right-0 w-full md:w-96 h-[50vh] md:h-full bg-[#262626] text-white z-20 shadow-2xl p-6 flex flex-col transition-transform duration-300 rounded-t-3xl md:rounded-none overflow-y-auto`}>
+                <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6 md:hidden"></div>
+
                 <div className="border-b border-gray-700 pb-6 mb-6">
                     <h2 className="text-lg font-bold">Delivery Details - {delivery.id}</h2>
                 </div>
@@ -98,7 +100,7 @@ const DispatchTracking = () => {
                 </div>
 
                 {/* Timeline */}
-                <div className="flex-1">
+                <div className="flex-1 min-h-[200px] md:min-h-0">
                     <div className="relative pl-6 space-y-8 before:absolute before:left-2 before:top-2 before:bottom-10 before:w-0.5 before:bg-gray-700">
                         {delivery.timeline.map((item, i) => (
                             <div key={i} className="relative">
@@ -113,7 +115,7 @@ const DispatchTracking = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="mt-auto space-y-3">
+                <div className="mt-8 md:mt-auto space-y-3 pb-safe">
                     <div className="grid grid-cols-2 gap-3">
                         <button className="bg-[#3D3D3D] hover:bg-gray-600 text-white font-bold py-3 rounded-lg text-xs flex items-center justify-center gap-2 transition-colors">
                             Confirm Receipt

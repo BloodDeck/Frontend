@@ -15,10 +15,11 @@ const MatchingAndAllocation = () => {
     ];
 
     return (
-        <div className="flex h-[calc(100vh-6rem)] -m-8">
+
+        <div className="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-6rem)] -m-4 md:-m-8">
             {/* Left Sidebar - Request Queue */}
-            <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
-                <div className="p-4 border-b border-gray-100">
+            <div className="w-full lg:w-80 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col h-auto max-h-96 lg:h-auto lg:max-h-full overflow-y-auto order-2 lg:order-1">
+                <div className="p-4 border-b border-gray-100 sticky top-0 bg-white z-10">
                     <h3 className="font-bold text-gray-900 mb-3">Request Queue (4)</h3>
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
@@ -57,9 +58,9 @@ const MatchingAndAllocation = () => {
             </div>
 
             {/* Center - Main Content */}
-            <div className="flex-1 bg-gray-50 p-6 overflow-y-auto">
+            <div className="flex-1 bg-gray-50 p-4 md:p-6 overflow-y-auto order-1 lg:order-2">
                 <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-                    <div className="flex justify-between items-start mb-6">
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-6 gap-6 md:gap-0">
                         <div>
                             <div className="flex items-center gap-3 mb-1">
                                 <span className="text-xs font-bold text-gray-500 uppercase">Patient ID</span>
@@ -70,16 +71,16 @@ const MatchingAndAllocation = () => {
                             <h1 className="text-3xl font-bold text-gray-900">NG-PAT-001</h1>
                             <p className="text-gray-500 text-sm">Lagos University Teaching Hospital (LUTH)</p>
                         </div>
-                        <div className="flex gap-8 text-sm">
-                            <div>
+                        <div className="flex flex-wrap gap-6 md:gap-8 text-sm">
+                            <div className="w-1/2 md:w-auto">
                                 <p className="text-gray-500 text-xs mb-1">Blood Component</p>
                                 <p className="font-bold text-gray-900">Whole Blood (O+)</p>
                             </div>
-                            <div>
+                            <div className="w-1/2 md:w-auto">
                                 <p className="text-gray-500 text-xs mb-1">Units Requested</p>
                                 <p className="font-bold text-gray-900">2 Units</p>
                             </div>
-                            <div>
+                            <div className="w-full md:w-auto">
                                 <p className="text-gray-500 text-xs mb-1">Request Time</p>
                                 <p className="font-bold text-gray-900">Today, 09:41 AM</p>
                             </div>
@@ -90,7 +91,7 @@ const MatchingAndAllocation = () => {
                     <p className="text-xs text-gray-500 mb-4">Showing best available matches nearby.</p>
 
                     {/* Placeholder Map */}
-                    <div className="w-full h-64 bg-green-100 rounded-xl mb-6 relative overflow-hidden border border-green-200">
+                    <div className="w-full h-48 md:h-64 bg-green-100 rounded-xl mb-6 relative overflow-hidden border border-green-200">
                         {/* Abstract Map Elements */}
                         <div className="absolute inset-0 bg-[url('https://maps.googleapis.com/maps/api/staticmap?center=Lagos&zoom=13&size=600x300&key=YOUR_API_KEY')] bg-cover bg-center opacity-50 mix-blend-multiply"></div>
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
@@ -107,14 +108,14 @@ const MatchingAndAllocation = () => {
 
                     {/* Tabs / Availability List */}
                     <div className="bg-white rounded-lg border border-gray-200 overflow-hidden divide-y divide-gray-100">
-                        <div className="flex items-center justify-between p-4 bg-gray-50 text-xs font-bold text-gray-600 border-b border-gray-200">
-                            <div className="flex gap-6">
+                        <div className="flex items-center justify-between p-4 bg-gray-50 text-xs font-bold text-gray-600 border-b border-gray-200 overflow-x-auto">
+                            <div className="flex gap-6 min-w-max">
                                 <span className="text-black border-b-2 border-black pb-4 -mb-4.5">Internal Stock (2)</span>
                                 <span className="text-gray-400">Nearby Banks (1)</span>
                                 <span className="text-gray-400">Available Donors (5)</span>
                             </div>
                         </div>
-                        <div className="p-4 flex items-center justify-between">
+                        <div className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center">
                                     <Package size={20} className="text-gray-600" />
@@ -124,9 +125,9 @@ const MatchingAndAllocation = () => {
                                     <p className="text-xs text-gray-500">O+ Available: <b className="text-gray-700">8 Units</b></p>
                                 </div>
                             </div>
-                            <span className="text-xs font-bold text-gray-400">0 km</span>
+                            <span className="text-xs font-bold text-gray-400 pl-14 sm:pl-0">0 km</span>
                         </div>
-                        <div className="p-4 flex items-center justify-between">
+                        <div className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-lg bg-gray-50 border border-gray-200 flex items-center justify-center">
                                     <span className="font-bold text-gray-600 text-xs">+</span>
@@ -136,14 +137,14 @@ const MatchingAndAllocation = () => {
                                     <p className="text-xs text-gray-500">Verified O+ Donor</p>
                                 </div>
                             </div>
-                            <span className="text-xs font-bold text-gray-400">2.1 km</span>
+                            <span className="text-xs font-bold text-gray-400 pl-14 sm:pl-0">2.1 km</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Right Panel - Allocate */}
-            <div className="w-96 bg-white border-l border-gray-200 flex flex-col p-6">
+            <div className="w-full lg:w-96 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col p-6 order-3">
                 <h3 className="font-bold text-gray-900 mb-6">Allocate & Reserve</h3>
 
                 <div className="mb-6 p-4 border border-gray-200 rounded-xl">
@@ -177,7 +178,7 @@ const MatchingAndAllocation = () => {
 
                     <button
                         onClick={() => setShowPaymentModal(true)}
-                        className="w-full bg-[#3D3D3D] hover:bg-black text-white font-bold py-4 rounded-xl mb-3 flex items-center justify-center gap-2 transition-colors"
+                        className="w-full bg-[#3D3D3D] hover:bg-black text-white font-bold py-4 rounded-xl mb-3 flex items-center justify-center gap-2 transition-colors shadow-lg"
                     >
                         <CheckCircle size={18} /> Reserve & Confirm Allocation
                     </button>
