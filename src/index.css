@@ -12,6 +12,11 @@ body {
   min-height: 100vh;
 }
 
+/* Let map fill its parent (parent sets height) */
+.leaflet-container {
+  height: 100%;
+}
+
 /* ===== Core Backgrounds for Donor Workflow ===== */
 /* #E5E7EB;           Main app background */
 /* #FFFFFF;         Cards and panels */

@@ -42,7 +42,7 @@ const Dashboard = () => {
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Map Section (Placeholder) */}
-                <div className="lg:col-span-2 bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 flex flex-col min-h-[400px] shadow-lg">
+                <div className="lg:col-span-2 bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 flex flex-col min-h-100 shadow-lg">
                     <div className="p-4 border-b border-white/5 flex justify-between items-center">
                         <h3 className="font-semibold text-white">Geospatial Inventory Distribution</h3>
                         <button className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
