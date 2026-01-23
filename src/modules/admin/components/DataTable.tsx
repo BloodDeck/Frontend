@@ -18,7 +18,7 @@ function DataTable<T extends { id: string | number }>({ columns, data, onRowClic
     return (
         <div className="bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 overflow-hidden shadow-lg">
             <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
+                <table className="hidden md:table w-full text-left text-sm">
                     <thead>
                         <tr className="bg-white/5 text-gray-400 text-xs uppercase tracking-wider border-b border-white/5">
                             {columns.map((col, index) => (
@@ -53,8 +53,32 @@ function DataTable<T extends { id: string | number }>({ columns, data, onRowClic
                         ))}
                     </tbody>
                 </table>
+
+                {/* Mobile Card View */}
+                <div className="md:hidden flex flex-col divide-y divide-white/5">
+                    {data.map((row) => (
+                        <div key={row.id} className="p-4 flex flex-col gap-3" onClick={() => onRowClick && onRowClick(row)}>
+                            {columns.map((col, index) => {
+                                const content = typeof col.accessor === 'function' ? col.accessor(row) : row[col.accessor];
+                                return (
+                                    <div key={index} className="flex justify-between items-start gap-4">
+                                        <span className="text-xs text-gray-500 font-medium uppercase shrink-0 mt-0.5">{col.header}</span>
+                                        <div className="text-sm text-gray-200 text-right break-words max-w-[70%]">
+                                            {content as React.ReactNode}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {actions && (
+                                <div className="flex justify-end pt-2 border-t border-white/5 mt-2">
+                                    {actions(row)}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
-            <div className="p-4 border-t border-white/10 flex justify-between items-center text-xs text-gray-500">
+            <div className="p-4 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4 sm:gap-0">
                 <span>Showing {data.length} entries</span>
                 <div className="flex gap-2">
                     <button className="px-3 py-1 bg-white/5 hover:bg-white/10 rounded border border-white/10 disabled:opacity-50 transition-colors">Previous</button>

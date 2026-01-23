@@ -20,7 +20,7 @@ const AdminLayout = () => {
     const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
     return (
-        <div className="flex min-h-screen bg-[#2A2A2A] font-['Montserrat'] text-gray-100">
+        <div className="flex min-h-screen bg-[#2A2A2A] font-['Montserrat'] text-gray-100 overflow-x-hidden">
             {/* Mobile Sidebar Overlay */}
             {isSidebarOpen && (
                 <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={toggleSidebar}></div>
@@ -137,7 +137,7 @@ const AdminLayout = () => {
                 </header>
 
                 {/* Page Content */}
-                <div className="flex-1 p-6 overflow-auto">
+                <div className="flex-1 p-4 md:p-6 overflow-auto">
                     <Outlet />
                 </div>
             </main>

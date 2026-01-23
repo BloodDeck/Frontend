@@ -31,7 +31,7 @@ const Dashboard = () => {
     return (
         <div className="space-y-6 font-['Montserrat'] bg-gray-50/50 min-h-screen md:p-0 overflow-x-hidden">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-transparent py-2 gap-4 md:gap-0">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-transparent py-2 gap-4 md:gap-0 px-3 md:px-0">
                 <div>
                     <h1 className="text-xl md:text-2xl font-bold text-gray-900">Admin Dashboard</h1>
                     <p className="text-gray-500 text-xs md:text-sm">Welcome back, Dr. Adeyemi</p>

@@ -4,6 +4,13 @@ import StatusChip from '../components/StatusChip';
 import { Users, Building2, AlertCircle, FileText, ChevronRight, MapPin, Sparkles } from 'lucide-react';
 
 const Dashboard = () => {
+    const recentAlerts = [
+        { time: 'Today, 10:42 AM', entity: 'Lagos University Teaching Hospital', event: 'Urgent O- Request (5 Units)', status: 'Critical' as const, action: 'Review', actionColor: 'text-blue-400 hover:text-blue-300' },
+        { time: 'Today, 09:15 AM', entity: 'LifeBlood Bank, Kano', event: 'Inventory Update (+120 Units)', status: 'Completed' as const, action: 'Details', actionColor: 'text-gray-500 hover:text-white' },
+        { time: 'Yesterday, 04:30 PM', entity: 'New Horizon Clinic', event: 'New Blood Bank Application', status: 'In Review' as const, action: 'Verify', actionColor: 'text-blue-400 hover:text-blue-300' },
+        { time: 'Yesterday, 02:15 PM', entity: 'System AI', event: 'Weekly Supply Forecast Generated', status: 'Automated', action: 'View', actionColor: 'text-gray-500 hover:text-white' },
+    ];
+
     return (
         <div className="space-y-6">
             {/* KPI Section */}
@@ -126,7 +133,8 @@ const Dashboard = () => {
                     </button>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm">
+                    {/* Desktop Table */}
+                    <table className="hidden md:table w-full text-left text-sm">
                         <thead>
                             <tr className="bg-white/5 text-gray-400 text-xs uppercase tracking-wider border-b border-white/5">
                                 <th className="px-6 py-4 font-medium">Timestamp</th>
@@ -137,36 +145,47 @@ const Dashboard = () => {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/5">
-                            <tr className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 text-gray-400">Today, 10:42 AM</td>
-                                <td className="px-6 py-4 font-medium text-gray-200">Lagos University Teaching Hospital</td>
-                                <td className="px-6 py-4 text-gray-300">Urgent O- Request (5 Units)</td>
-                                <td className="px-6 py-4"><StatusChip status="Critical" /></td>
-                                <td className="px-6 py-4 text-right text-blue-400 hover:text-blue-300 cursor-pointer text-xs font-bold">Review</td>
-                            </tr>
-                            <tr className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 text-gray-400">Today, 09:15 AM</td>
-                                <td className="px-6 py-4 font-medium text-gray-200">LifeBlood Bank, Kano</td>
-                                <td className="px-6 py-4 text-gray-300">Inventory Update (+120 Units)</td>
-                                <td className="px-6 py-4"><StatusChip status="Completed" /></td>
-                                <td className="px-6 py-4 text-right text-gray-500 hover:text-white cursor-pointer text-xs font-bold">Details</td>
-                            </tr>
-                            <tr className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 text-gray-400">Yesterday, 04:30 PM</td>
-                                <td className="px-6 py-4 font-medium text-gray-200">New Horizon Clinic</td>
-                                <td className="px-6 py-4 text-gray-300">New Blood Bank Application</td>
-                                <td className="px-6 py-4"><StatusChip status="In Review" /></td>
-                                <td className="px-6 py-4 text-right text-blue-400 hover:text-blue-300 cursor-pointer text-xs font-bold">Verify</td>
-                            </tr>
-                            <tr className="hover:bg-white/5 transition-colors">
-                                <td className="px-6 py-4 text-gray-400">Yesterday, 02:15 PM</td>
-                                <td className="px-6 py-4 font-medium text-gray-200">System AI</td>
-                                <td className="px-6 py-4 text-gray-300">Weekly Supply Forecast Generated</td>
-                                <td className="px-6 py-4"><span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-400 border border-purple-500/30">• Automated</span></td>
-                                <td className="px-6 py-4 text-right text-gray-500 hover:text-white cursor-pointer text-xs font-bold">View</td>
-                            </tr>
+                            {recentAlerts.map((alert, i) => (
+                                <tr key={i} className="hover:bg-white/5 transition-colors">
+                                    <td className="px-6 py-4 text-gray-400">{alert.time}</td>
+                                    <td className="px-6 py-4 font-medium text-gray-200">{alert.entity}</td>
+                                    <td className="px-6 py-4 text-gray-300">{alert.event}</td>
+                                    <td className="px-6 py-4">
+                                        {alert.status === 'Automated' ? (
+                                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-900/30 text-purple-400 border border-purple-500/30">• Automated</span>
+                                        ) : (
+                                            <StatusChip status={alert.status as any} />
+                                        )}
+                                    </td>
+                                    <td className={`px-6 py-4 text-right cursor-pointer text-xs font-bold ${alert.actionColor}`}>{alert.action}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
+
+                    {/* Mobile Card View */}
+                    <div className="md:hidden flex flex-col divide-y divide-white/5">
+                        {recentAlerts.map((alert, i) => (
+                            <div key={i} className="p-4 flex flex-col gap-3">
+                                <div className="flex justify-between items-start">
+                                    <div className="flex-1">
+                                        <p className="text-gray-400 text-xs mb-1">{alert.time}</p>
+                                        <p className="font-bold text-gray-200 text-sm mb-1">{alert.entity}</p>
+                                        <p className="text-gray-400 text-xs">{alert.event}</p>
+                                    </div>
+                                    <div className="flex flex-col items-end gap-2">
+                                        {alert.status === 'Automated' ? (
+                                            <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-purple-900/30 text-purple-400 border border-purple-500/30">Automated</span>
+                                        ) : (
+                                            <StatusChip status={alert.status as any} />
+                                        )}
+                                        <button className={`text-xs font-bold ${alert.actionColor}`}>{alert.action}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
                     <div className="p-4 border-t border-white/10 text-center">
                         <button className="text-xs text-gray-500 hover:text-white transition-colors">View All Activity</button>
                     </div>
