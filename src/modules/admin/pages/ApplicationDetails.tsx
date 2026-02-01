@@ -21,27 +21,27 @@ const ApplicationDetails = () => {
                         <span className="text-[10px] font-bold">BLOODBANK</span>
                     </div>
 
-                    <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                            <h1 className="text-2xl font-bold text-white">Lagos City Blood Bank</h1>
-                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-yellow-900/30 text-yellow-500 border border-yellow-700/50">
+                    <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-3 mb-2">
+                            <h1 className="text-xl md:text-2xl font-bold text-white truncate">Lagos City Blood Bank</h1>
+                            <span className="px-3 py-1 rounded-full text-xs font-bold bg-yellow-900/30 text-yellow-500 border border-yellow-700/50 whitespace-nowrap">
                                 PENDING REVIEW
                             </span>
                         </div>
-                        <p className="text-sm text-gray-400 mb-4">
+                        <p className="text-sm text-gray-400 mb-4 break-words">
                             Application ID: #APP-2023-8492 • Submitted on Oct 24, 2023
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="flex items-center gap-2 text-xs text-green-500 bg-green-900/20 px-3 py-1.5 rounded border border-green-900/50">
+                            <div className="flex items-center gap-2 text-xs text-green-500 bg-green-900/20 px-3 py-1.5 rounded border border-green-900/50 w-fit">
                                 <CheckCircle size={14} /> Verified Email
                             </div>
-                            <div className="flex items-center gap-2 text-xs text-green-500 bg-green-900/20 px-3 py-1.5 rounded border border-green-900/50">
+                            <div className="flex items-center gap-2 text-xs text-green-500 bg-green-900/20 px-3 py-1.5 rounded border border-green-900/50 w-fit">
                                 <CheckCircle size={14} /> Verified Phone
                             </div>
                         </div>
                     </div>
-                    <button className="bg-[#1F1F1F] hover:bg-[#333333] text-gray-300 px-4 py-2 rounded text-sm font-medium border border-[#3D3D3D] flex items-center gap-2">
+                    <button className="w-full md:w-auto bg-[#1F1F1F] hover:bg-[#333333] text-gray-300 px-4 py-2 rounded text-sm font-medium border border-[#3D3D3D] flex items-center justify-center gap-2 transition-colors">
                         <Download size={16} /> Download PDF Summary
                     </button>
                 </div>
@@ -58,7 +58,7 @@ const ApplicationDetails = () => {
                             <h3 className="font-bold text-white">Contact & Legal Information</h3>
                             <button className="text-xs text-gray-500 hover:text-white font-medium">Edit Details</button>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
                             <div className="space-y-1">
                                 <p className="text-xs text-gray-500 uppercase tracking-wider">Official Email</p>
                                 <p className="text-sm text-white font-medium flex items-center gap-2">
@@ -109,8 +109,8 @@ const ApplicationDetails = () => {
                             onChange={(e) => setReviewNote(e.target.value)}
                         />
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4 text-sm">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm w-full md:w-auto">
                                 <label className="flex items-center gap-2 text-gray-400 cursor-pointer hover:text-white">
                                     <input type="checkbox" className="form-checkbox bg-[#1A1A1A] border-[#3D3D3D] rounded hover:border-gray-500" />
                                     Notify applicant via email
@@ -120,14 +120,14 @@ const ApplicationDetails = () => {
                                     Save as internal note
                                 </label>
                             </div>
-                            <div className="flex gap-3">
-                                <button className="px-6 py-2 rounded-lg border border-red-900/50 text-red-500 font-bold hover:bg-red-900/20 text-sm">
+                            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                <button className="flex-1 sm:flex-none justify-center px-6 py-2 rounded-lg border border-red-900/50 text-red-500 font-bold hover:bg-red-900/20 text-sm transition-colors">
                                     Reject
                                 </button>
-                                <button className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm">
+                                <button className="flex-1 sm:flex-none justify-center px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-colors">
                                     Request Changes
                                 </button>
-                                <button className="px-6 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white font-bold text-sm">
+                                <button className="flex-1 sm:flex-none justify-center px-6 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white font-bold text-sm transition-colors">
                                     Approve Application
                                 </button>
                             </div>
