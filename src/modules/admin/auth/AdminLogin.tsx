@@ -1,27 +1,63 @@
-
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { login } from '../../../api/api';  // Correct relative path from src/modules/admin/auth/
 import { AuthInput } from './components/AuthInput';
 import { AuthButton } from './components/AuthButton';
 import { SocialButton } from './components/SocialButton';
 
-const AdminLogin = () => {
+interface LoginResponse {
+  role: string;
+  access?: string;
+  refresh?: string;
+  key?: string;
+}
+
+const AdminLogin: React.FC = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const response = await login({ email, password }) as LoginResponse;
+            const role = response.role || 'admin';
+            toast.success('Login successful!');
+            if (role === 'admin') {
+                navigate('/admin/dashboard');
+            } else {
+                navigate(`/${role.toLowerCase()}/dashboard`);
+            }
+        } catch (error: any) {
+            console.error('Login failed:', error);
+            toast.error(error.message || 'Login failed. Check credentials.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="w-full">
             <h1 className="text-3xl font-bold mb-2 text-center">Welcome Back!</h1>
             <p className="text-gray-500 text-center mb-8 text-sm">Enter your details to proceed further</p>
 
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
                 <AuthInput
                     label="Email"
                     type="email"
                     placeholder="helloblooddeck@gmail.com"
-                    defaultValue="helloblooddeck@gmail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
                 <AuthInput
                     label="Your password"
                     type="password"
                     placeholder="Vitalink_NG"
-                    defaultValue="Vitalink_NG"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
 
                 <div className="flex items-center justify-between mb-6">
@@ -34,8 +70,8 @@ const AdminLogin = () => {
                     </Link>
                 </div>
 
-                <AuthButton type="submit">
-                    Sign In
+                <AuthButton type="submit" disabled={loading}>
+                    {loading ? 'Signing In...' : 'Sign In'}
                 </AuthButton>
             </form>
 
@@ -54,7 +90,7 @@ const AdminLogin = () => {
             </div>
 
             <p className="mt-8 text-center text-sm font-medium">
-                Don't have an account? <Link to="/admin/register" className="font-bold text-black hover:underline">Sign Up</Link>
+                Don't have an account? <Link to="/register" className="font-bold text-black hover:underline">Sign Up</Link>
             </p>
         </div>
     );

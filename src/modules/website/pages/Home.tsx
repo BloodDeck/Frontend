@@ -86,7 +86,7 @@ const Home = () => {
                             </div>
                             <h3 className="text-xl font-bold mb-3">Admin</h3>
                             <p className="text-gray-500 mb-6">System administration, user management, and platform analytics.</p>
-                            <Link to="/admin/login" className="text-gray-800 font-semibold hover:text-gray-900 flex items-center">
+                            <Link to="/login" className="text-gray-800 font-semibold hover:text-gray-900 flex items-center">
                                 Enter Portal <span className="ml-2">&rarr;</span>
                             </Link>
                         </div>

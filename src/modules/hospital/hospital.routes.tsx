@@ -25,11 +25,11 @@ export const hospitalRoutes: RouteObject[] = [
         ]
     },
     {
-        path: '/hospital/login',
+        path: '/login',
         element: <HospitalLogin />
     },
     {
-        path: '/hospital/register',
+        path: '/register',
         element: <HospitalRegistration />
     }
 ];

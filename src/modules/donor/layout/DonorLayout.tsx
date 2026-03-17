@@ -1,17 +1,61 @@
-
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Heart, Clock, User, LogOut, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Heart, Clock, User as UserIcon, LogOut, Menu, X } from 'lucide-react';
+import { fetchData, logout } from '../../../api/api';
 
 const DonorLayout = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    
+    // State to hold the dynamic user data
+    const [user, setUser] = useState({
+        firstName: 'Generous',
+        lastName: 'Donor',
+        role: 'Donor',
+        email: ''
+    });
+
+    // Fetch user profile on mount
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                const data = await fetchData('auth/user/');
+                setUser({
+                    firstName: data.first_name || 'Generous',
+                    lastName: data.last_name || 'Donor',
+                    role: data.role || 'donor',
+                    email: data.email
+                });
+            } catch (error) {
+                console.error("Failed to load donor profile:", error);
+                // Fallback: decode JWT if API fails
+                const token = localStorage.getItem('access_token');
+                if (token) {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    setUser(prev => ({
+                        ...prev,
+                        firstName: payload.name?.split(' ')[0] || 'Generous',
+                        lastName: payload.name?.split(' ')[1] || 'Donor',
+                        email: payload.email || ''
+                    }));
+                }
+            }
+        };
+
+        loadUser();
+    }, []);
+
+    const handleLogout = () => {
+        logout(); // Clears tokens from localStorage
+        navigate('/donor/login'); // Redirects to donor login
+    };
 
     const navItems = [
         { path: '/donor/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { path: '/donor/donate', label: 'Donate Now', icon: Heart },
         { path: '/donor/history', label: 'My History', icon: Clock },
-        { path: '/donor/profile', label: 'Profile', icon: User },
+        { path: '/donor/profile', label: 'Profile', icon: UserIcon },
     ];
 
     return (
@@ -46,10 +90,16 @@ const DonorLayout = () => {
 
                     <div className="hidden md:flex items-center gap-4">
                         <div className="text-right hidden lg:block">
-                            <p className="text-sm font-bold text-gray-900">John Doe</p>
-                            <p className="text-xs text-gray-500">O+ Donor</p>
+                            <p className="text-sm font-bold text-gray-900">
+                                {user.firstName} {user.lastName}
+                            </p>
+                            <p className="text-xs text-gray-500 capitalize">{user.role}</p>
                         </div>
-                        <button className="p-2 text-gray-400 hover:text-red-600 transition-colors">
+                        <button 
+                            onClick={handleLogout}
+                            className="p-2 text-gray-400 hover:text-red-600 transition-colors"
+                            title="Log out"
+                        >
                             <LogOut size={20} />
                         </button>
                     </div>
@@ -66,6 +116,17 @@ const DonorLayout = () => {
                 {/* Mobile Nav */}
                 {isMobileMenuOpen && (
                     <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg p-4 flex flex-col gap-2">
+                        {/* Mobile User Profile Summary */}
+                        <div className="px-4 py-3 bg-red-50 rounded-lg mb-2 flex items-center gap-3">
+                             <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">
+                                {user.firstName.charAt(0)}
+                             </div>
+                             <div>
+                                 <p className="text-sm font-bold text-gray-900">{user.firstName} {user.lastName}</p>
+                                 <p className="text-xs text-gray-600">{user.email}</p>
+                             </div>
+                        </div>
+
                         {navItems.map((item) => {
                             const Icon = item.icon;
                             const isActive = location.pathname.startsWith(item.path);
@@ -82,7 +143,10 @@ const DonorLayout = () => {
                             )
                         })}
                         <div className="border-t border-gray-100 my-2 pt-2">
-                            <button className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-500 hover:text-red-600">
+                            <button 
+                                onClick={handleLogout}
+                                className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-500 hover:text-red-600"
+                            >
                                 <LogOut size={18} /> Log Out
                             </button>
                         </div>

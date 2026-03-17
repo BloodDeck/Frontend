@@ -12,7 +12,7 @@ const WebsiteLayout = () => {
                         <Link to="/contact" className="text-gray-600 hover:text-red-600 font-medium">Contact</Link>
                     </nav>
                     <div className="flex space-x-4">
-                        <Link to="/donor/login" className="px-4 py-2 text-red-600 border border-red-600 rounded-md hover:bg-red-50">Login</Link>
+                        <Link to="/login" className="px-4 py-2 text-red-600 border border-red-600 rounded-md hover:bg-red-50">Login</Link>
                         <Link to="/donor/register" className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Donate Now</Link>
                     </div>
                 </div>
@@ -39,10 +39,10 @@ const WebsiteLayout = () => {
                     <div>
                         <h4 className="font-bold mb-4">Portals</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li><Link to="/donor/login" className="hover:text-white">Donor Login</Link></li>
-                            <li><Link to="/hospital/login" className="hover:text-white">Hospital Login</Link></li>
-                            <li><Link to="/bloodbank/login" className="hover:text-white">Blood Bank Login</Link></li>
-                            <li><Link to="/admin/login" className="hover:text-white">Admin Login</Link></li>
+                            <li><Link to="/login" className="hover:text-white">Donor Login</Link></li>
+                            <li><Link to="/login" className="hover:text-white">Hospital Login</Link></li>
+                            <li><Link to="/login" className="hover:text-white">Blood Bank Login</Link></li>
+                            <li><Link to="/login" className="hover:text-white">Admin Login</Link></li>
                         </ul>
                     </div>
                     <div>

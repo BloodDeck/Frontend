@@ -1,15 +1,48 @@
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Activity, Building2, Package, Settings, LogOut, Bell, Search, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Activity, Building2, Package, Settings, LogOut, Bell, Search, Menu, ChevronLeft, ChevronRight, Users } from 'lucide-react';
+import { logout, fetchData } from '../../../api/api';
 import logoWhite from '../../../assets/images/logo_white.png';
 
 const AdminLayout = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const [user, setUser] = useState({ name: 'Admin User', email: 'super@lifeblood.ng' });
+
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                // Attempt to fetch user profile from a standard endpoint
+                try {
+                    const userData = await fetchData('auth/user/');
+                    setUser({
+                        name: `${userData.first_name} ${userData.last_name}`.trim() || userData.username || 'Admin User',
+                        email: userData.email || 'admin@lifeblood.ng'
+                    });
+                } catch (apiError) {
+                    // Fallback: Decode JWT token claims if API endpoint isn't ready
+                    const token = localStorage.getItem('access_token');
+                    if (token) {
+                        const payload = JSON.parse(atob(token.split('.')[1]));
+                        setUser({
+                            name: payload.name || payload.username || 'Admin User',
+                            email: payload.email || payload.sub || 'admin@lifeblood.ng'
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load user info:', error);
+            }
+        };
+
+        loadUser();
+    }, []);
 
     const navItems = [
         { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+        { path: '/admin/users', label: 'Manage Users', icon: Users },
         { path: '/admin/applications', label: 'BloodBank Application', icon: Activity },
         { path: '/admin/hospitals', label: 'Hospital Application', icon: Building2 },
         { path: '/admin/inventory', label: 'Inventory', icon: Package },
@@ -18,6 +51,11 @@ const AdminLayout = () => {
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const toggleCollapse = () => setIsCollapsed(!isCollapsed);
+
+    const handleLogout = () => {
+        logout();
+        navigate('http://localhost:5173/login'); // Good practice to explicitly route away after logout
+    };
 
     return (
         <div className="flex min-h-screen bg-[#2A2A2A] font-['Montserrat'] text-gray-100 overflow-x-hidden">
@@ -86,21 +124,22 @@ const AdminLayout = () => {
                 <div className="p-4 border-t border-white/10">
                     <div className={`flex items-center gap-3 mb-4 ${isCollapsed ? 'justify-center' : 'px-2'}`}>
                         <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-xs font-bold ring-2 ring-black">
-                            SA
+                            {user.name.charAt(0).toUpperCase()}
                         </div>
                         {!isCollapsed && (
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium truncate">Admin User</p>
-                                <p className="text-xs text-gray-500 truncate">super@lifeblood.ng</p>
+                                <p className="text-sm font-medium truncate">{user.name}</p>
+                                <p className="text-xs text-gray-500 truncate">{user.email}</p>
                             </div>
                         )}
-                        {!isCollapsed && <LogOut size={16} className="text-gray-500 cursor-pointer hover:text-white" />}
                     </div>
-                    {!isCollapsed && (
-                        <button className="flex items-center gap-2 text-xs text-gray-500 hover:text-white px-2">
-                            <LogOut size={14} /> Logout
-                        </button>
-                    )}
+                    <button 
+                        onClick={handleLogout} 
+                        className={`flex items-center gap-2 text-xs text-gray-500 hover:text-white transition-colors ${isCollapsed ? 'justify-center w-full' : 'px-2'}`}
+                    >
+                        <LogOut size={isCollapsed ? 18 : 14} /> 
+                        {!isCollapsed && <span>Logout</span>}
+                    </button>
                 </div>
             </aside>
 
@@ -130,8 +169,8 @@ const AdminLayout = () => {
                             <Bell size={20} />
                             <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
                         </button>
-                        <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
-                            <img src="https://ui-avatars.com/api/?name=Admin+User&background=random" alt="User" />
+                        <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center">
+                             <span className="text-gray-600 font-bold text-xs">{user.name.charAt(0).toUpperCase()}</span>
                         </div>
                     </div>
                 </header>
