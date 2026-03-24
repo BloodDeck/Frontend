@@ -1,11 +1,16 @@
 import React from 'react';
 import { RouteObject } from 'react-router-dom';
+
+// Layout
 import BloodBankLayout from './layout/BloodBankLayout';
+
+// Auth Pages (We will create these below)
 import BloodBankLogin from './auth/BloodBankLogin';
 
-const Dashboard = () => <div>Blood Bank Dashboard</div>;
-const Stock = () => <div>Stock Management</div>;
-const Distribution = () => <div>Distribution</div>;
+// Main Pages
+import Dashboard from './pages/Dashboard';
+import Stock from './pages/Stock';
+import Distribution from './pages/Distribution';
 
 export const bloodBankRoutes: RouteObject[] = [
     {
@@ -17,8 +22,12 @@ export const bloodBankRoutes: RouteObject[] = [
             { path: 'distribution', element: <Distribution /> },
         ]
     },
-    {
-        path: '/bloodbank/login',
-        element: <BloodBankLogin />
-    }
+    // {
+    //     path: '/login',
+    //     element: <BloodBankLogin />
+    // },
+    // {
+    //     path: '/register',
+    //     element: <BloodBankRegistration />
+    // }
 ];
